@@ -177,5 +177,5 @@
     "SettingsImportBadFile": "There are no settings in this file.",
     "SettingsImported": "Imported {count} settings.",
     "SettingsImportFailed": "Importing failed: {msg}",
-    "ErrPluginMissing": "The server plugin is not loaded. Run `node plugins.js install <repository url of this extension>` in the SillyTavern folder, add `enableServerPlugins: true` to config.yaml and restart SillyTavern."
+    "ErrPluginMissing": "The server plugin is not loaded. Run `node plugins.js install https://github.com/liangzhongyuan804-design/SillyTavern-S2-TTS` in the SillyTavern folder, add `enableServerPlugins: true` to config.yaml and restart SillyTavern (server plugins need SillyTavern 1.19 or newer)."
 }

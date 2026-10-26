@@ -189,8 +189,10 @@ async function api(path, body) {
             // means exactly one thing: the plugin is missing or disabled.
             throw new Error(t(
                 'ErrPluginMissing',
-                '服务端插件没有加载。在酒馆目录执行 `node plugins.js install <本扩展的仓库地址>`，'
-                + '并在 config.yaml 里加上 `enableServerPlugins: true`，然后重启酒馆。',
+                '服务端插件没有加载。在酒馆目录执行 '
+                + '`node plugins.js install https://github.com/liangzhongyuan804-design/SillyTavern-S2-TTS`，'
+                + '并在 config.yaml 里加上 `enableServerPlugins: true`，然后重启酒馆'
+                + '（服务端插件需要 SillyTavern 1.19 及以上）。',
             ));
         }
         if (!response.ok) {
