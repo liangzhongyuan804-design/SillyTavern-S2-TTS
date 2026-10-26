@@ -4,6 +4,8 @@
 
 全程本地推理，不联网、不上传任何对话内容。
 
+仓库地址：<https://github.com/liangzhongyuan804-design/SillyTavern-S2-TTS>
+
 ---
 
 ## 功能
@@ -143,7 +145,7 @@ s2.cpp  --chunked PCM-->  服务端插件  --HTTP chunked-->  浏览器  -->  Au
 **第 1 步 · 装服务端插件。** 在**酒馆目录**里执行（`plugins.js` 是酒馆自带的插件管理器）：
 
 ```bash
-node plugins.js install https://github.com/<你的账号>/SillyTavern-S2-TTS
+node plugins.js install https://github.com/liangzhongyuan804-design/SillyTavern-S2-TTS
 ```
 
 它会把仓库克隆到 `<ST>/plugins/SillyTavern-S2-TTS/`，
@@ -240,7 +242,15 @@ SillyTavern-S2-TTS/            ← 仓库根 = 扩展管理器看到的扩展目
 **扩展是自定位的**：它用 `import.meta.url` 算出自己被装在哪个目录下，
 所以仓库改名、换安装方式都不用重装。
 
-### 把它发布成一个 git 仓库
+### 这个仓库本身
+
+它已经是一个公开的 git 仓库，地址是：
+
+```
+https://github.com/liangzhongyuan804-design/SillyTavern-S2-TTS
+```
+
+*方式一* 里的两条命令直接用这个地址就能装。想自己发一份的话：
 
 ```bash
 cd SillyTavern-S2-TTS
@@ -984,6 +994,7 @@ s2.cpp 会打印 `Prefilling N tokens`，N 里包含参考音频编码出来的�
 
 ## 相关
 
+- 本仓库：<https://github.com/liangzhongyuan804-design/SillyTavern-S2-TTS>
 - 上游引擎：[rodrigomatta/s2.cpp](https://github.com/rodrigomatta/s2.cpp)
 - 模型：[rodrigomt/s2-pro-gguf](https://huggingface.co/rodrigomt/s2-pro-gguf)
 - 同作者的 ComfyUI 插件：[xuanhai0/ComfyUI-FishS2-GGUF](https://github.com/xuanhai0/ComfyUI-FishS2-GGUF)
