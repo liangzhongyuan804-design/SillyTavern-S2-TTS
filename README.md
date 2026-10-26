@@ -151,8 +151,15 @@ node plugins.js install https://github.com/liangzhongyuan804-design/SillyTavern-
 它会把仓库克隆到 `<ST>/plugins/SillyTavern-S2-TTS/`，
 而且以后每次开机酒馆都会自动 `git pull` 更新它。
 
-**第 2 步 · 装浏览器扩展。** 酒馆里：*扩展* → *安装扩展* → 粘贴同一个地址 → 安装。
-它会克隆到 `<ST>/public/scripts/extensions/third-party/SillyTavern-S2-TTS/`。
+**第 2 步 · 装浏览器扩展。** 酒馆里：*扩展* → *安装扩展程序* → 粘贴同一个地址 → 安装。
+弹窗里有两个按钮，区别只是克隆到哪儿：
+
+| 按钮 | 落地目录 | 酒馆里显示的名字 |
+|---|---|---|
+| *给所有人安装* | `<ST>/public/scripts/extensions/third-party/SillyTavern-S2-TTS/` | `third-party/SillyTavern-S2-TTS` |
+| *只给我安装* | `<ST>/data/<用户名>/extensions/SillyTavern-S2-TTS/` | `third-party/SillyTavern-S2-TTS` |
+
+两种装法在酒馆里都是同一个名字，扩展是自定位的，所以随便挑一个就行。
 
 > 浏览器扩展是**自定位**的：它用 `import.meta.url` 算出自己被装在哪个目录下，
 > 所以仓库叫什么名字、装在哪个目录下都不影响，仓库改名也不用重装。
