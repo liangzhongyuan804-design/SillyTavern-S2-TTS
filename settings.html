@@ -1,0 +1,348 @@
+<div id="s2tts_settings">
+    <div class="inline-drawer">
+        <div class="inline-drawer-toggle inline-drawer-header">
+            <b data-i18n="S2 TTS">S2 TTS</b>
+            <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
+        </div>
+        <div class="inline-drawer-content">
+
+            <!-- ── Service ──────────────────────────────────────────── -->
+            <div class="s2tts-block-title" data-i18n="Service">Service</div>
+            <div class="s2tts-row">
+                <span class="s2tts-label" data-i18n="Server URL">Server URL</span>
+                <input id="s2tts_server_url" type="text" class="text_pole width100p"
+                       placeholder="http://127.0.0.1:3030" />
+            </div>
+            <div class="s2tts-row">
+                <span id="s2tts_status" class="s2tts-status s2tts-status-offline" data-i18n="Disconnected">Disconnected</span>
+                <input id="s2tts_test" class="menu_button" type="submit"
+                       data-i18n="[value]Test connection" value="Test connection" />
+                <input id="s2tts_speak_test" class="menu_button" type="submit"
+                       data-i18n="[value]Speak test" value="Speak test" />
+            </div>
+
+            <!-- ── Voice ────────────────────────────────────────────── -->
+            <div class="s2tts-block-title" data-i18n="Voice">Voice</div>
+            <div class="s2tts-row">
+                <label class="checkbox_label" for="s2tts_mode_saved">
+                    <input type="radio" id="s2tts_mode_saved" name="s2tts_voice_mode" value="saved">
+                    <small data-i18n="Saved voice">Saved voice</small>
+                </label>
+                <label class="checkbox_label" for="s2tts_mode_reference">
+                    <input type="radio" id="s2tts_mode_reference" name="s2tts_voice_mode" value="reference">
+                    <small data-i18n="Reference audio">Reference audio</small>
+                </label>
+            </div>
+
+            <div id="s2tts_saved_block">
+                <div class="s2tts-row">
+                    <select id="s2tts_voice" class="flex1"></select>
+                    <input id="s2tts_refresh_voices" class="menu_button" type="submit"
+                           data-i18n="[value]Refresh" value="Refresh" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Voice directory">Voice directory</span>
+                    <input id="s2tts_voice_dir" type="text" class="text_pole width100p"
+                           placeholder="F:\s2\s2.cpp\voices" />
+                </div>
+            </div>
+
+            <div id="s2tts_reference_block">
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Pick an audio file">Pick an audio file</span>
+                    <!-- SillyTavern hides every input[type=file] globally, so the
+                         extension's own stylesheet brings this one back. -->
+                    <input id="s2tts_ref_file" type="file" accept="audio/*,.wav,.mp3,.flac,.ogg,.m4a" />
+                </div>
+                <div class="s2tts-row">
+                    <span id="s2tts_ref_name" class="s2tts-hint" data-i18n="No file selected">No file selected</span>
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-hint" data-i18n="Reference length hint">Keep the clip short (5–15 seconds). Longer references make the encoder run out of VRAM and silently fall back to a default voice.</span>
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Reference transcript">Reference transcript</span>
+                </div>
+                <div class="s2tts-row">
+                    <textarea id="s2tts_ref_text" class="text_pole textarea-compact" rows="3"
+                              data-i18n="[placeholder]Verbatim transcript of the reference audio"
+                              placeholder="Verbatim transcript of the reference audio"></textarea>
+                </div>
+            </div>
+
+            <!-- ── Tag voice (性别 / 性格 / 语气) ──────────────────── -->
+            <div class="s2tts-block-title" data-i18n="Tag voice">Tag voice</div>
+            <div class="s2tts-row">
+                <label class="checkbox_label" for="s2tts_tag_enabled">
+                    <input type="checkbox" id="s2tts_tag_enabled">
+                    <small data-i18n="Tag voice enabled">Pick the voice from the tags in the reply</small>
+                </label>
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-hint" data-i18n="Tag syntax hint">A reply may open with a tag block: 小雅·女·妩媚·生气·：“你怎么才来！” — the tags choose the voice, only the text behind the colon is spoken.</span>
+            </div>
+            <div class="s2tts-row">
+                <label class="checkbox_label" for="s2tts_tag_strip_unknown">
+                    <input type="checkbox" id="s2tts_tag_strip_unknown">
+                    <small data-i18n="Strip unknown tags">Also strip a tag block that matches no voice</small>
+                </label>
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-label" data-i18n="Voice directory">Voice directory</span>
+                <span id="s2tts_tag_dir" class="s2tts-hint"></span>
+                <input id="s2tts_tag_refresh" class="menu_button" type="submit"
+                       data-i18n="[value]Refresh tree" value="Refresh tree" />
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-label" data-i18n="Voice tree">Voice tree</span>
+            </div>
+            <div class="s2tts-row">
+                <div id="s2tts_tag_tree" class="s2tts-tree"></div>
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-label" data-i18n="Available tags">Available tags</span>
+            </div>
+            <div class="s2tts-row">
+                <div id="s2tts_tag_names" class="s2tts-tags"></div>
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-label" data-i18n="Tag tester">Tag tester</span>
+                <input id="s2tts_tag_test" type="text" class="text_pole width100p"
+                       placeholder="小雅·女·妩媚·生气·：“你好”" />
+                <input id="s2tts_tag_test_run" class="menu_button" type="submit"
+                       data-i18n="[value]Speak test line" value="Speak test line" />
+            </div>
+            <div class="s2tts-row">
+                <span id="s2tts_tag_test_result" class="s2tts-hint"></span>
+            </div>
+            <div class="s2tts-row">
+                <span id="s2tts_tag_test_text" class="s2tts-hint"></span>
+            </div>
+
+            <details class="s2tts-advanced">
+                <summary data-i18n="Custom tags">Custom tags</summary>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Gender tags">Gender tags</span>
+                    <input id="s2tts_tag_custom_gender" type="text" class="text_pole width100p"
+                           placeholder="女,男,其他" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Personality tags">Personality tags</span>
+                    <input id="s2tts_tag_custom_personality" type="text" class="text_pole width100p"
+                           placeholder="妩媚,高冷,活泼" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Tone tags">Tone tags</span>
+                    <input id="s2tts_tag_custom_tone" type="text" class="text_pole width100p"
+                           placeholder="生气,温柔,开心" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-hint" data-i18n="Custom tags hint">Extra names that may be used as a tag. The folder names of the voice directory are added automatically.</span>
+                </div>
+            </details>
+
+            <!-- ── Generation parameters ────────────────────────────── -->
+            <details class="s2tts-advanced">
+                <summary data-i18n="Generation parameters">Generation parameters</summary>
+                <div class="s2tts-row">
+                    <label class="checkbox_label" for="s2tts_streaming">
+                        <input type="checkbox" id="s2tts_streaming">
+                        <small data-i18n="Streaming playback">Streaming playback</small>
+                    </label>
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-hint" data-i18n="Streaming hint">Start playing while the audio is still being generated. Much faster to hear, but the server cannot split the text by sentence.</span>
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Start buffer (ms)">Start buffer (ms)</span>
+                    <input id="s2tts_stream_buffer" type="number" class="text_pole" min="0" max="10000" step="50" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Temperature">Temperature</span>
+                    <input id="s2tts_temperature" type="number" class="text_pole" min="0.01" max="2" step="0.01" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Top P">Top P</span>
+                    <input id="s2tts_top_p" type="number" class="text_pole" min="0.01" max="1" step="0.01" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Top K">Top K</span>
+                    <input id="s2tts_top_k" type="number" class="text_pole" min="1" max="500" step="1" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Max tokens">Max tokens</span>
+                    <input id="s2tts_max_tokens" type="number" class="text_pole" min="32" max="32768" step="32" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Sentence pause (ms)">Sentence pause (ms)</span>
+                    <input id="s2tts_sentence_pause" type="number" class="text_pole" min="0" max="5000" step="10" />
+                </div>
+                <div class="s2tts-row">
+                    <label class="checkbox_label" for="s2tts_segment">
+                        <input type="checkbox" id="s2tts_segment">
+                        <small data-i18n="Sentence splitting">Sentence splitting</small>
+                    </label>
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-hint" id="s2tts_segment_hint" data-i18n="Segment hint">The server synthesizes one sentence at a time, which gives better pauses but delays the first audio in streaming mode.</span>
+                </div>
+            </details>
+
+            <!-- ── Cache ────────────────────────────────────────────── -->
+            <div class="s2tts-block-title" data-i18n="Cache">Cache</div>
+            <div class="s2tts-row">
+                <label class="checkbox_label" for="s2tts_cache_enabled">
+                    <input type="checkbox" id="s2tts_cache_enabled">
+                    <small data-i18n="Persistent cache">Persistent cache</small>
+                </label>
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-hint" data-i18n="Cache hint">Synthesized audio is stored on disk in the SillyTavern data folder. The same reply plays instantly the next time, even after a restart.</span>
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-label" data-i18n="Cache limit (MB)">Cache limit (MB)</span>
+                <input id="s2tts_cache_max" type="number" class="text_pole" min="16" max="16384" step="64" />
+            </div>
+            <div class="s2tts-row">
+                <span id="s2tts_cache_state" class="s2tts-hint" data-i18n="Cache stats">Cache statistics are not loaded yet.</span>
+                <input id="s2tts_cache_refresh" class="menu_button interactable" type="submit" data-i18n="[value]Refresh" value="刷新" tabindex="0" role="button">
+                <input id="s2tts_cache_clear" class="menu_button interactable" type="submit" data-i18n="[value]Clear cache" value="清空缓存" tabindex="0" role="button">
+            </div>
+            <div class="s2tts-row">
+                <span id="s2tts_cache_dir" class="s2tts-hint"></span>
+            </div>
+
+            <!-- ── Behaviour ────────────────────────────────────────── -->
+            <div class="s2tts-block-title" data-i18n="Behaviour">Behaviour</div>
+            <div class="s2tts-row">
+                <label class="checkbox_label" for="s2tts_auto_play">
+                    <input type="checkbox" id="s2tts_auto_play">
+                    <small data-i18n="Auto-play new replies">Auto-play new replies</small>
+                </label>
+            </div>
+            <div class="s2tts-row">
+                <label class="checkbox_label" for="s2tts_narrate_user">
+                    <input type="checkbox" id="s2tts_narrate_user">
+                    <small data-i18n="Narrate user messages">Narrate user messages</small>
+                </label>
+            </div>
+            <div class="s2tts-row">
+                <label class="checkbox_label" for="s2tts_show_button">
+                    <input type="checkbox" id="s2tts_show_button">
+                    <small data-i18n="Show message button">Show message button</small>
+                </label>
+            </div>
+            <div class="s2tts-row">
+                <label class="checkbox_label" for="s2tts_strip_tags">
+                    <input type="checkbox" id="s2tts_strip_tags">
+                    <small data-i18n="Strip tags">Strip tags</small>
+                </label>
+                <label class="checkbox_label" for="s2tts_strip_code">
+                    <input type="checkbox" id="s2tts_strip_code">
+                    <small data-i18n="Strip code blocks">Strip code blocks</small>
+                </label>
+                <label class="checkbox_label" for="s2tts_strip_asterisks">
+                    <input type="checkbox" id="s2tts_strip_asterisks">
+                    <small data-i18n="Strip asterisks">Strip asterisks</small>
+                </label>
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-label" data-i18n="Playback speed">Playback speed</span>
+                <input id="s2tts_rate" type="range" min="0.5" max="2" step="0.05" />
+                <span id="s2tts_rate_value" class="s2tts-hint">1.00</span>
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-label" data-i18n="Read range">Read range</span>
+                <input id="s2tts_read_range" type="text" class="text_pole width100p"
+                       placeholder="【朗读内容】" />
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-hint" data-i18n="Read range hint">Only the text between the markers is read aloud. The outer characters are the markers, the text in between is just a label — 【朗读内容】 reads what is inside 【 and 】. Leave it on 朗读 to read the whole message.</span>
+            </div>
+            <div class="s2tts-row">
+                <label class="checkbox_label" for="s2tts_read_range_fallback">
+                    <input type="checkbox" id="s2tts_read_range_fallback">
+                    <small data-i18n="Read range fallback">Read the whole message when the text has no range</small>
+                </label>
+            </div>
+
+            <!-- ── Engine log ───────────────────────────────────────── -->
+            <details class="s2tts-advanced">
+                <summary data-i18n="Engine log">Engine log</summary>
+                <div class="s2tts-row">
+                    <input id="s2tts_show_logs" class="menu_button" type="submit"
+                           data-i18n="[value]Show engine log" value="Show engine log" />
+                    <span id="s2tts_log_state" class="s2tts-hint" data-i18n="No log yet">No log yet</span>
+                </div>
+                <div class="s2tts-row">
+                    <pre id="s2tts_log_view" class="s2tts-log"></pre>
+                </div>
+            </details>
+
+            <!-- ── Server process ───────────────────────────────────── -->
+            <details class="s2tts-advanced">
+                <summary data-i18n="Server process">Server process</summary>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="s2.exe path">s2.exe path</span>
+                    <input id="s2tts_exe" type="text" class="text_pole width100p"
+                           placeholder="F:\s2\s2.cpp\build\Debug\s2.exe" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Model path">Model path</span>
+                    <input id="s2tts_model" type="text" class="text_pole width100p"
+                           placeholder="F:\s2\s2.cpp\models\s2-pro-q8_0.gguf" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Tokenizer path">Tokenizer path</span>
+                    <input id="s2tts_tokenizer" type="text" class="text_pole width100p"
+                           placeholder="F:\s2\s2.cpp\tokenizer.json" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="DLL directory">DLL directory</span>
+                    <input id="s2tts_dll_dir" type="text" class="text_pole width100p"
+                           placeholder="F:\s2\bin\x64" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="CUDA device">CUDA device</span>
+                    <input id="s2tts_cuda" type="number" class="text_pole" min="0" max="16" step="1" />
+                    <span class="s2tts-label" data-i18n="GPU layers">GPU layers</span>
+                    <input id="s2tts_gpu_layers" type="number" class="text_pole" min="-1" max="256" step="1" />
+                </div>
+                <div class="s2tts-row">
+                    <span class="s2tts-label" data-i18n="Codec backend">Codec backend</span>
+                    <select id="s2tts_codec">
+                        <option value="auto">Auto</option>
+                        <option value="follow backend">Follow backend</option>
+                        <option value="cpu">CPU</option>
+                    </select>
+                </div>
+                <div class="s2tts-row">
+                    <input id="s2tts_start_server" class="menu_button" type="submit"
+                           data-i18n="[value]Start server" value="Start server" />
+                    <input id="s2tts_stop_server" class="menu_button" type="submit"
+                           data-i18n="[value]Stop server" value="Stop server" />
+                </div>
+            </details>
+
+            <!-- ── Settings management ────────────────────────────── -->
+            <div class="s2tts-block-title" data-i18n="Settings">Settings</div>
+            <div class="s2tts-row">
+                <input id="s2tts_save_settings" class="menu_button" type="submit"
+                       data-i18n="[value]Save settings" value="Save settings" />
+                <input id="s2tts_export_settings" class="menu_button" type="submit"
+                       data-i18n="[value]Export settings" value="Export settings" />
+                <input id="s2tts_import_settings" class="menu_button" type="submit"
+                       data-i18n="[value]Import settings" value="Import settings" />
+            </div>
+            <div class="s2tts-row">
+                <input id="s2tts_import_file" type="file" accept="application/json,.json" />
+                <span id="s2tts_settings_state" class="s2tts-hint"
+                      data-i18n="Settings are saved automatically">Settings are saved automatically</span>
+            </div>
+            <div class="s2tts-row">
+                <span class="s2tts-hint" data-i18n="Export hint">Export writes a JSON file with every path and option. Import it on another SillyTavern to move the configuration over.</span>
+            </div>
+
+        </div>
+    </div>
+</div>

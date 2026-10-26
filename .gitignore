@@ -1,0 +1,9 @@
+# Test artifacts that are regenerated on every run.
+test/generated-sample.wav
+test/last-run.log
+
+# Editors and operating systems.
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

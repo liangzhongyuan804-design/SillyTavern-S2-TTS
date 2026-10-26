@@ -1,0 +1,9 @@
+{
+    "name": "st-s2-tts",
+    "version": "1.8.0",
+    "description": "SillyTavern server plugin that bridges the browser extension to a local s2.cpp speech server.",
+    "type": "module",
+    "main": "index.js",
+    "license": "GPL-3.0-only",
+    "private": true
+}

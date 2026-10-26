@@ -1,0 +1,6 @@
+# Keep the line endings of the repository as they are: the whole project uses
+# LF. Without this, Git would check the files out with CRLF on Windows.
+* text=auto eol=lf
+
+# The test clip is binary.
+*.wav binary

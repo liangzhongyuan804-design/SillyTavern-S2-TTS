@@ -1,0 +1,30 @@
+{
+    "name": "sillytavern-s2-tts",
+    "version": "1.8.0",
+    "description": "SillyTavern extension for local s2.cpp (Fish Audio S2-Pro GGUF) speech synthesis: the browser extension reads the roleplay reply and plays the synthesized audio.",
+    "type": "module",
+    "main": "plugin/index.js",
+    "private": true,
+    "license": "GPL-3.0-only",
+    "keywords": [
+        "sillytavern",
+        "extension",
+        "tts",
+        "s2.cpp",
+        "fish-audio"
+    ],
+    "files": [
+        "manifest.json",
+        "index.js",
+        "player.js",
+        "queue.js",
+        "sanitize.js",
+        "profile.js",
+        "profile-ui.js",
+        "voicetree.js",
+        "settings.html",
+        "style.css",
+        "locales/",
+        "plugin/"
+    ]
+}
